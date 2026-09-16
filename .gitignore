@@ -5,3 +5,6 @@ out
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
+
+# Original full-size artwork and the old static site; web copies are in public/images
+team-bodymechanik-step6/

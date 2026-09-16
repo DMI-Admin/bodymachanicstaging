@@ -146,15 +146,34 @@ contact form.
 
 ## Redeploying after a change
 
+This server runs the app under PM2 on port **3002**:
+
 ```bash
 cd ~/apps/teambodymechanik
 git pull
 npm ci
 npm run build:standalone
+cp .env.local .next/standalone/.env.local
+PORT=3002 pm2 restart teambodymechanik --update-env
 ```
 
-Then **Restart** the app in NodeJS Manager. `.env.local` survives `git pull`
-because it's gitignored, and gets re-copied into the bundle on every build.
+Keep `PORT=3002` on the restart — with `--update-env` and no `PORT`, PM2 drops
+the variable, the app falls back to 3000, and the proxy starts returning 503.
+
+A config-only change (e.g. a new API key) needs just the `cp` and the restart,
+not a rebuild.
+
+---
+
+## Rolling back
+
+The site replaced the coming-soon page in a single merge commit on `main`. To
+go back, revert that merge, push, and run the redeploy steps above:
+
+```bash
+git revert -m 1 <merge-commit>
+git push
+```
 
 ---
 
@@ -184,8 +203,9 @@ ProxyPassReverse / http://127.0.0.1:3000/
 
 | Symptom | Cause |
 | --- | --- |
-| Contact form returns **503** | Env vars not visible. Confirm `.next/standalone/.env.local` exists; rebuild if not. |
-| Contact form returns **502** | Env vars loaded but Resend rejected the send — bad API key, or `CONTACT_FROM_EMAIL` uses an unverified domain. Check the app log. |
+| Form returns **503** | Env vars not visible. Confirm `.next/standalone/.env.local` exists; rebuild if not. |
+| Form returns **502** | Env vars loaded but the send failed. The app log prints the reason: `Resend returned HTTP 401` = bad API key, `403` = unverified sender domain, `422` = Resend testing mode (only delivers to your Resend signup address). |
+| Log shows `WebAssembly.instantiate(): Out of memory` | Something is calling `fetch` from the server. This host can't run it in a long-lived process — use `node:https` (see `src/lib/mail.ts`). |
 | Page loads unstyled | `.next/static` wasn't copied. Re-run `npm run build:standalone`. |
 | **502 from the domain** (not the form) | Node process isn't running, or the port doesn't match the one registered in NodeJS Manager. |
 | Port refused | sPanel only allows **3000–3500**. |
