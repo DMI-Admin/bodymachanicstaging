@@ -1,57 +1,25 @@
-import { request as httpsRequest } from "node:https";
 import { NextResponse } from "next/server";
+import { mailConfig, sendNotification } from "@/lib/mail";
 import { site } from "@/lib/site";
 
 /**
- * POST JSON using node:https rather than fetch.
+ * One endpoint for every form on the site. `kind` selects the validation and
+ * the notification email:
  *
- * Node's fetch (undici) parses HTTP with a WebAssembly build of llhttp. On
- * hosts that cap per-process virtual memory — common on panel/VPS hosting —
- * a long-lived server can fail to instantiate that module, and every fetch
- * dies with "WebAssembly.instantiate(): Out of memory" before opening a
- * socket. node:https uses the native C++ parser and has no such dependency.
+ *   contact  — name, email, message
+ *   apply    — name, email, goal, optional message
+ *   recipes  — email only
  */
-function postJson(
-  url: string,
-  headers: Record<string, string>,
-  body: string,
-  timeoutMs = 15_000,
-): Promise<{ status: number; body: string }> {
-  return new Promise((resolve, reject) => {
-    const target = new URL(url);
-
-    const req = httpsRequest(
-      {
-        hostname: target.hostname,
-        port: target.port || 443,
-        path: `${target.pathname}${target.search}`,
-        method: "POST",
-        headers: { ...headers, "Content-Length": Buffer.byteLength(body) },
-      },
-      (res) => {
-        let data = "";
-        res.setEncoding("utf8");
-        res.on("data", (chunk) => (data += chunk));
-        res.on("end", () => resolve({ status: res.statusCode ?? 0, body: data }));
-      },
-    );
-
-    req.setTimeout(timeoutMs, () => req.destroy(new Error(`Timed out after ${timeoutMs}ms`)));
-    req.on("error", reject);
-    req.end(body);
-  });
-}
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-const LIMITS = { name: 100, email: 254, phone: 40, message: 4000 } as const;
+const LIMITS = { name: 100, email: 254, message: 4000 } as const;
 
 /**
  * Best-effort throttle: 5 submissions per IP per 10 minutes.
  *
- * This lives in module memory, so it resets on redeploy and is per-instance
+ * This lives in module memory, so it resets on restart and is per-instance
  * rather than global. It deters casual abuse; put a real rate limiter or a
- * CAPTCHA in front if this page starts attracting spam.
+ * CAPTCHA in front if the site starts attracting spam.
  */
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
@@ -72,77 +40,13 @@ function clientIp(request: Request) {
   return forwarded?.split(",")[0]?.trim() || request.headers.get("x-real-ip") || "unknown";
 }
 
-/** Submissions are attacker-controlled — escape before embedding in the email. */
-function escapeHtml(value: string) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
 /** Strip CR/LF so a submitted value can't inject extra email headers. */
 function singleLine(value: string) {
   return value.replace(/[\r\n]+/g, " ").trim();
 }
 
-type Payload = {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-};
-
-function buildEmail({ name, email, phone, message }: Payload) {
-  const rows: [string, string][] = [
-    ["Name", name],
-    ["Email", email],
-    ["Phone", phone || "—"],
-  ];
-
-  const html = `
-<div style="margin:0;padding:24px;background:#0b0907;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-  <div style="max-width:560px;margin:0 auto;background:#12100c;border:1px solid #3a2606;border-radius:8px;overflow:hidden;">
-    <div style="padding:18px 24px;background:#191309;border-bottom:1px solid #3a2606;">
-      <p style="margin:0;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#e0a62b;">
-        ${escapeHtml(site.name)} — New enquiry
-      </p>
-    </div>
-    <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">
-      ${rows
-        .map(
-          ([label, value]) => `
-      <tr>
-        <td style="padding:12px 24px;border-bottom:1px solid #241a08;color:#9c8a63;font-size:12px;letter-spacing:.12em;text-transform:uppercase;width:110px;vertical-align:top;">${escapeHtml(label)}</td>
-        <td style="padding:12px 24px;border-bottom:1px solid #241a08;color:#f4e7c8;font-size:15px;">${escapeHtml(value)}</td>
-      </tr>`,
-        )
-        .join("")}
-      <tr>
-        <td style="padding:16px 24px;color:#9c8a63;font-size:12px;letter-spacing:.12em;text-transform:uppercase;vertical-align:top;">Message</td>
-        <td style="padding:16px 24px;color:#f4e7c8;font-size:15px;line-height:1.6;white-space:pre-wrap;">${escapeHtml(message)}</td>
-      </tr>
-    </table>
-    <div style="padding:14px 24px;background:#0e0b07;border-top:1px solid #241a08;">
-      <p style="margin:0;color:#7a6b4c;font-size:12px;">Reply directly to this email to reach ${escapeHtml(name)}.</p>
-    </div>
-  </div>
-</div>`.trim();
-
-  const text = [
-    `${site.name} — new enquiry`,
-    "",
-    `Name:  ${name}`,
-    `Email: ${email}`,
-    `Phone: ${phone || "—"}`,
-    "",
-    "Message:",
-    message,
-  ].join("\n");
-
-  return { html, text };
-}
+const bad = (message = "Please check your details and try again.") =>
+  NextResponse.json({ message }, { status: 400 });
 
 export async function POST(request: Request) {
   let body: Record<string, unknown>;
@@ -153,89 +57,88 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Invalid request." }, { status: 400 });
   }
 
+  const kind = body.kind ?? "contact";
+  if (kind !== "contact" && kind !== "apply" && kind !== "recipes") return bad();
+
   // Honeypot filled in => bot. Answer as if it worked, send nothing.
   if (typeof body.company === "string" && body.company.trim() !== "") {
-    return NextResponse.json({ message: "Message sent. We'll be in touch." });
+    return NextResponse.json({ message: "Thanks — we'll be in touch." });
   }
 
   if (rateLimited(clientIp(request))) {
     return NextResponse.json(
-      { message: "That's a few messages already — please try again a little later." },
+      { message: "That's a few submissions already — please try again a little later." },
       { status: 429 },
     );
   }
 
   const str = (key: string) => (typeof body[key] === "string" ? (body[key] as string).trim() : "");
 
-  const name = singleLine(str("name"));
   const email = singleLine(str("email")).toLowerCase();
-  const phone = singleLine(str("phone"));
+  if (!EMAIL_RE.test(email) || email.length > LIMITS.email) return bad();
+
+  const name = singleLine(str("name"));
   const message = str("message");
+  const goal = singleLine(str("goal"));
 
-  if (
-    !name ||
-    name.length > LIMITS.name ||
-    !EMAIL_RE.test(email) ||
-    email.length > LIMITS.email ||
-    phone.length > LIMITS.phone ||
-    !message ||
-    message.length > LIMITS.message
-  ) {
-    return NextResponse.json({ message: "Please check your details and try again." }, { status: 400 });
-  }
+  if (kind !== "recipes" && (!name || name.length > LIMITS.name)) return bad();
+  if (message.length > LIMITS.message) return bad();
+  if (kind === "contact" && !message) return bad();
+  if (kind === "apply" && !(site.goals as readonly string[]).includes(goal)) return bad();
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
-  const from = process.env.CONTACT_FROM_EMAIL;
-
-  if (!apiKey || !to || !from) {
-    console.error(
-      "[contact] Missing config. Set RESEND_API_KEY, CONTACT_TO_EMAIL and CONTACT_FROM_EMAIL.",
-    );
+  const config = mailConfig();
+  if (!config) {
+    console.error("[contact] Missing config. Set RESEND_API_KEY, CONTACT_TO_EMAIL and CONTACT_FROM_EMAIL.");
     return NextResponse.json(
-      { message: "The contact form isn't configured yet. Please reach us on Instagram." },
+      { message: "This form isn't connected yet. Please message us on Instagram." },
       { status: 503 },
     );
   }
 
-  const { html, text } = buildEmail({ name, email, phone, message });
+  const notification =
+    kind === "apply"
+      ? {
+          heading: "Coaching application",
+          subject: `Coaching application: ${name} — ${goal}`,
+          rows: [
+            ["Name", name],
+            ["Email", email],
+            ["Goal", goal],
+          ] as [string, string][],
+          message: message || undefined,
+          success: "Application received. We'll review it and be in touch personally.",
+        }
+      : kind === "recipes"
+        ? {
+            heading: "Recipe subscriber",
+            subject: `New recipe subscriber: ${email}`,
+            rows: [["Email", email]] as [string, string][],
+            message: undefined,
+            success: "You're on the list — recipes are on their way.",
+          }
+        : {
+            heading: "New message",
+            subject: `New message from ${name}`,
+            rows: [
+              ["Name", name],
+              ["Email", email],
+            ] as [string, string][],
+            message,
+            success: "Message sent. We'll get back to you soon.",
+          };
 
   try {
-    const res = await postJson(
-      "https://api.resend.com/emails",
-      {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      JSON.stringify({
-        from,
-        to: to.split(",").map((address) => address.trim()),
-        reply_to: email,
-        subject: `New enquiry from ${name} — ${site.name}`,
-        html,
-        text,
-      }),
-    );
-
-    if (res.status < 200 || res.status >= 300) {
-      console.error("[contact] Resend returned HTTP", res.status, res.body.slice(0, 500));
-      return NextResponse.json(
-        { message: "We couldn't send that just now. Please try again shortly." },
-        { status: 502 },
-      );
-    }
-
-    const payload = JSON.parse(res.body) as { id?: string };
-    console.info("[contact] sent", payload?.id);
+    const id = await sendNotification(config, { ...notification, replyTo: email });
+    console.info(`[contact] ${kind} sent`, id);
   } catch (error) {
-    // undici buries the real reason in `cause` — surface it, or this is undebuggable.
+    // undici and node:https both bury the real reason in `cause` — surface it.
     const err = error as Error & { cause?: unknown };
-    console.error("[contact] send threw:", err?.name, err?.message, "| cause:", err?.cause);
+    console.error(`[contact] ${kind} failed:`, err?.message, "| cause:", err?.cause);
     return NextResponse.json(
       { message: "We couldn't send that just now. Please try again shortly." },
       { status: 502 },
     );
   }
 
-  return NextResponse.json({ message: "Message sent. We'll be in touch." });
+  return NextResponse.json({ message: notification.success });
 }
