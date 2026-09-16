@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
     // them on a host that caps per-process memory.
     unoptimized: true,
   },
+  // On staging (NOINDEX=true), tell crawlers to skip every response — images
+  // included, which the page's robots meta tag can't cover.
+  async headers() {
+    if (process.env.NOINDEX !== "true") return [];
+    return [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }];
+  },
 };
 
 export default nextConfig;

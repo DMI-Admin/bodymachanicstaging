@@ -10,6 +10,10 @@ const oswald = Oswald({
   display: "swap",
 });
 
+// Staging servers set NOINDEX=true so search engines don't index a duplicate
+// of the live site. Read at build time, so rebuild after changing it.
+const noindex = process.env.NOINDEX === "true";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -34,7 +38,7 @@ export const metadata: Metadata = {
     description: site.description,
     images: ["/og.jpg"],
   },
-  robots: { index: true, follow: true },
+  robots: noindex ? { index: false, follow: false } : { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
