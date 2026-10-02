@@ -37,6 +37,14 @@ export default function Hero() {
 
       <div className="shell relative z-[2] grid items-center gap-8 py-10 lg:min-h-[calc(100svh-84px)] lg:grid-cols-[1.15fr_.85fr] lg:gap-12 lg:py-16">
         <div>
+          <p
+            className="fade-up mb-4 flex items-center gap-3 font-display text-[11px] tracking-[0.3em] text-gold-2 uppercase sm:text-xs"
+            style={{ "--d": "60ms" } as React.CSSProperties}
+          >
+            <span className="h-px w-8 bg-gradient-to-r from-transparent to-gold" aria-hidden="true" />
+            {site.motto}
+          </p>
+
           <p className="eyebrow fade-up" style={{ "--d": "100ms" } as React.CSSProperties}>
             {site.hero.eyebrow}
           </p>

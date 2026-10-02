@@ -1,9 +1,10 @@
 # Team Bodymechanik — Website
 
 The Team Bodymechanik coaching site, built with Next.js 16 (App Router) and
-Tailwind CSS v4. It's a single long page: hero, stats, recipe signup, coaching
-programme, how it works, transformations, about, testimonials, FAQ, contact and
-the coaching application.
+Tailwind CSS v4. It's a single long page: hero, stats, the five outcomes, recipe signup,
+coaching programme, what's included with pricing, how it works,
+transformations, about, testimonials, FAQ, contact and the coaching
+application.
 
 ```bash
 npm install

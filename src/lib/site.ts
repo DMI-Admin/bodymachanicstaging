@@ -11,6 +11,7 @@ export const site = {
 
   nav: [
     { label: "Coaching", href: "#coaching" },
+    { label: "What's Included", href: "#included" },
     { label: "How It Works", href: "#method" },
     { label: "Results", href: "#results" },
     { label: "Testimonials", href: "#testimonials" },
@@ -23,6 +24,9 @@ export const site = {
     { label: "@teambodymechanik", href: "https://www.instagram.com/teambodymechanik/" },
     { label: "@coach_krish_x", href: "https://www.instagram.com/coach_krish_x/" },
   ],
+
+  motto: "Discipline builds freedom",
+  promise: "Real experience. Real support. Real results.",
 
   hero: {
     eyebrow: "Premium online body transformation coaching",
@@ -42,7 +46,80 @@ export const site = {
     { value: "Real", label: "Accountability" },
   ],
 
-  ticker: ["Discipline", "Consistency", "Transformation", "Accountability", "Results That Last"],
+  ticker: [
+    "Discipline Builds Freedom",
+    "Better Habits",
+    "A Stronger You",
+    "A Brighter Future",
+    "Results That Last",
+  ],
+
+  /** The five outcomes from the coaching flyer. */
+  outcomes: [
+    { icon: "dumbbell", line1: "Build", line2: "Strength" },
+    { icon: "flame", line1: "Lose", line2: "Body Fat" },
+    { icon: "pulse", line1: "Improve", line2: "Health" },
+    { icon: "chart", line1: "Gain", line2: "Confidence" },
+    { icon: "lotus", line1: "Create a", line2: "Better You" },
+  ],
+
+  /** "What you'll receive" — the eight things coaching includes. */
+  included: {
+    title: "What you'll receive",
+    subtitle: "More than just a plan — real support every step of the way",
+    items: [
+      {
+        icon: "fork",
+        title: "Personalised Nutrition Plan",
+        text: "Tailored to your goals, food preferences, lifestyle and cultural needs.",
+      },
+      {
+        icon: "dumbbell",
+        title: "Personalised Training Plan",
+        text: "Designed around your goals, training experience, available equipment and any injuries or limitations.",
+      },
+      {
+        icon: "app",
+        title: "Access to Our Coaching App",
+        text: "Log workouts, food photos, progress pictures and track your results — all in one place.",
+      },
+      {
+        icon: "people",
+        title: "Ongoing Accountability",
+        text: "We're with you every step of the way to make sure you stay on track and get results.",
+      },
+      {
+        icon: "chart",
+        title: "Weekly Check-ins & Progress Reports",
+        text: "We review your progress, make adjustments and keep you accountable.",
+      },
+      {
+        icon: "chat",
+        title: "Direct Messaging Support",
+        text: "Ask questions, get advice and receive ongoing guidance throughout your journey.",
+      },
+      {
+        icon: "education",
+        title: "Education & Guidance",
+        text: "Learn the \u2018why\u2019 behind nutrition, training and habits so you can maintain results long term.",
+      },
+      {
+        icon: "heart",
+        title: "A Supportive Community",
+        text: "Be part of a like-minded community that motivates and inspires you.",
+      },
+    ],
+  },
+
+  pricing: {
+    script: "Your transformation starts here",
+    terms: [
+      { icon: "calendar", value: "3 month", label: "Minimum commitment" },
+      { icon: "price", value: "£250", label: "Per month" },
+    ],
+    note: "Invest in a stronger, healthier, more confident you.",
+    cta: "Let's build your stronger tomorrow",
+  },
 
   coaching: [
     "Personalised nutrition and meal structure",
