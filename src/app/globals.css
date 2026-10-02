@@ -154,6 +154,9 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   white-space: nowrap;
+  /* Never let a flex parent shrink a button narrower than its label: .btn
+     hides overflow for the hover streak, so shrinking silently clips text. */
+  min-width: fit-content;
   box-shadow:
     0 8px 28px rgba(212, 175, 55, 0.18),
     inset 0 1px rgba(255, 255, 255, 0.35);
@@ -714,6 +717,26 @@ main {
 
 [aria-expanded="true"] .faq-icon::before {
   rotate: 180deg;
+}
+
+/* Animated show/hide for a conditional block (height can't transition).
+   Deliberately not called "collapse": Tailwind ships a utility of that name
+   (visibility: collapse) and utilities beat this layer, which would hide the
+   field while still reserving its space. */
+.field-reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--ease-out-expo), opacity 0.35s ease;
+  opacity: 0;
+}
+
+.field-reveal[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.field-reveal > div {
+  overflow: hidden;
 }
 
 /* ==================================================================

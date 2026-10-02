@@ -32,7 +32,8 @@ export function useSubmit(kind: FormKind) {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, kind }),
+        // `kind` first so a form field named `kind` (the enquiry selector) wins
+        body: JSON.stringify({ kind, ...payload }),
       });
       const data = (await res.json().catch(() => ({}))) as { message?: string };
 

@@ -53,8 +53,13 @@ All three forms post to `POST /api/contact` with a `kind`:
 | Form | `kind` | Required fields |
 |---|---|---|
 | Recipe signup | `recipes` | email |
-| Contact | `contact` | name, email, message |
-| Coaching application | `apply` | name, email, goal (one of `site.goals`); message optional |
+| Enquiry — "a general question" | `contact` | name, email, message |
+| Enquiry — "applying for coaching" | `apply` | name, email, goal (one of `site.goals`); message optional |
+
+The application and contact forms are one form ([`Enquiry.tsx`](src/components/sections/Enquiry.tsx)). Its
+first field is a `<select name="kind">`, so the choice is sent as `kind` and
+the server validates accordingly; picking "applying for coaching" reveals the
+Goal field. Both `#apply` and `#contact` links land on that section.
 
 Each sends a notification email to `CONTACT_TO_EMAIL` with the visitor's address
 as `Reply-To`, so replying goes straight back to them. Recipe signups are emailed
@@ -101,6 +106,11 @@ without JS.
 
 - Desktop nav appears at 1280px; below that it's the menu button
 - Testimonials are a swipeable row on phones, a grid above 650px
+- Don't name a CSS class after a Tailwind utility (`.collapse`, `.grid`…).
+  Utilities beat the component layer, so the utility silently wins — that's why
+  the conditional form field is `.field-reveal`
+- `.btn` sets `min-width: fit-content`: it hides overflow for the hover streak,
+  so a flex parent shrinking it would clip the label instead of wrapping
 - `main` has `overflow-x: clip` — the slide-in reveals start elements offset
   sideways, and without it they widen the page on phones. Use `clip`, not
   `hidden`, or the sticky column in the application section stops sticking

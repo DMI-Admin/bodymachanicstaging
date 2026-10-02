@@ -51,15 +51,15 @@ export default function Included() {
         {/* Pricing band */}
         <div
           id="pricing"
-          className="card mt-14 flex flex-col items-center gap-7 p-7 sm:mt-16 sm:p-10 lg:flex-row lg:gap-12"
+          className="card mt-14 flex flex-col items-center gap-7 p-7 sm:mt-16 sm:p-10 xl:flex-row xl:gap-12"
           data-accent="true"
           data-reveal="scale"
         >
-          <p className="font-display text-center text-[clamp(26px,4vw,38px)] leading-[1.05] text-gold-2 uppercase lg:text-left">
+          <p className="font-display text-center text-[clamp(26px,4vw,38px)] leading-[1.05] text-gold-2 uppercase xl:text-left">
             {pricing.script}
           </p>
 
-          <div className="flex flex-1 flex-col items-center gap-6 sm:flex-row sm:justify-center lg:justify-start">
+          <div className="flex flex-1 flex-wrap items-center justify-center gap-x-10 gap-y-5 xl:justify-start">
             {pricing.terms.map((term) => (
               <div key={term.label} className="flex items-center gap-3">
                 <Glyph name={term.icon} className="size-7 flex-none text-gold-2" />
@@ -71,7 +71,10 @@ export default function Included() {
             ))}
           </div>
 
-          <a href="#apply" className="btn group w-full px-7 lg:w-auto">
+          <a
+            href="#apply"
+            className="btn group w-full px-7 py-3 text-center leading-tight whitespace-normal xl:w-auto"
+          >
             {pricing.cta}
             <ArrowRightIcon className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
