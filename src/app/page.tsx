@@ -13,7 +13,7 @@ import Stats from "@/components/sections/Stats";
 import Testimonials from "@/components/sections/Testimonials";
 
 /**
- * The page is one funnel for the Desi Body Reset membership on Skool:
+ * The page is one funnel for the Team Bodymechanik Membership (hosted on Skool):
  * promise → proof → what's inside → how it works → social proof → price →
  * who we are → objections → 1:1 coaching and questions.
  */

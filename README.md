@@ -1,7 +1,7 @@
 # Team Bodymechanik — Website
 
 The Team Bodymechanik coaching site, built with Next.js 16 (App Router) and
-Tailwind CSS v4. It's a single long page that sells the Desi Body Reset membership on Skool:
+Tailwind CSS v4. It's a single long page that sells the Team Bodymechanik Membership (hosted on Skool):
 hero, stats, transformations, what's inside the membership, how it works,
 testimonials, pricing (membership vs 1:1 coaching), about, FAQ, and the 1:1
 coaching application / contact form.

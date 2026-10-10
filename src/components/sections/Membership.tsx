@@ -1,7 +1,7 @@
 import { ArrowRightIcon, Glyph } from "../icons";
 import { site } from "@/lib/site";
 
-/** What members get inside Desi Body Reset, then a join prompt. */
+/** What members get inside the membership, then a join prompt. */
 export default function Membership() {
   const { inside, membership } = site;
 
@@ -59,7 +59,7 @@ export default function Membership() {
         >
           <div className="text-center xl:text-left">
             <p className="font-display text-[clamp(26px,4vw,38px)] leading-[1.05] text-gold-2 uppercase">
-              {membership.name} <span className="text-cream">{membership.by}</span>
+              Team Bodymechanik <span className="text-cream">Membership</span>
             </p>
             <p className="mt-2 text-sm text-muted">{membership.tagline}</p>
           </div>
@@ -67,8 +67,8 @@ export default function Membership() {
           <div className="flex flex-1 items-center justify-center gap-3 xl:justify-start">
             <strong className="font-display text-[44px] leading-none text-cream">{membership.price}</strong>
             <span>
-              <span className="block text-[11px] tracking-[0.12em] text-muted uppercase">per {membership.period}</span>
-              <span className="block text-[11px] tracking-[0.12em] text-gold-2 uppercase">{membership.priceNote}</span>
+              <span className="block text-[11px] tracking-[0.12em] whitespace-nowrap text-muted uppercase">per {membership.period}</span>
+              <span className="block text-[11px] tracking-[0.12em] whitespace-nowrap text-gold-2 uppercase">{membership.priceNote}</span>
             </span>
           </div>
 

@@ -3,15 +3,15 @@
  * require hunting through components.
  */
 
-/** The Desi Body Reset membership lives on Skool — every "Join" button goes here. */
+/** The membership is hosted on Skool — every "Join" button goes here. */
 const SKOOL_URL = "https://www.skool.com/desi-body-reset-by-tbm-9772/about";
 
 export const site = {
   name: "Team Bodymechanik",
   url: "https://www.teambodymechanik.com",
-  title: "Desi Body Reset | Team Bodymechanik",
+  title: "Team Bodymechanik | Online Fitness Membership & Coaching",
   description:
-    "Desi Body Reset by Team Bodymechanik — South Asian fitness and fat loss coaching. Home and gym workouts, high-protein Desi recipes and coach support, without giving up the food you love.",
+    "The Team Bodymechanik Membership — South Asian fitness and fat loss coaching. Home and gym workouts, high-protein Desi recipes and coach support, without giving up the food you love.",
 
   nav: [
     { label: "Results", href: "#results" },
@@ -34,18 +34,17 @@ export const site = {
 
   /** The main product. Prices are shown exactly as they appear on Skool. */
   membership: {
-    name: "Desi Body Reset",
-    by: "by TBM",
+    name: "Team Bodymechanik Membership",
     tagline: "South Asian fitness and fat loss coaching",
     url: SKOOL_URL,
-    price: "$10",
+    price: "£9.99",
     period: "month",
     priceNote: "Founding member price",
-    cta: "Join Desi Body Reset",
+    cta: "Join the Membership",
   },
 
   hero: {
-    eyebrow: "Desi Body Reset — now open on Skool",
+    eyebrow: "The Team Bodymechanik Membership — now open",
     lines: [
       { text: "Transform", gold: false },
       { text: "Your Body.", gold: true },
@@ -64,7 +63,7 @@ export const site = {
     { value: "Hundreds", label: "Of clients coached" },
     { value: "Home & Gym", label: "Workout plans" },
     { value: "Desi", label: "Recipes & food swaps" },
-    { value: "$10", label: "Per month" },
+    { value: "£9.99", label: "Per month" },
   ],
 
   ticker: [
@@ -75,9 +74,9 @@ export const site = {
     "Results That Last",
   ],
 
-  /** What members get inside Desi Body Reset (from the Skool community page). */
+  /** What members get inside the membership (from the Skool community page). */
   inside: {
-    title: "Inside Desi Body Reset",
+    title: "Inside the Membership",
     subtitle:
       "Everything we use with our 1:1 clients, in one place — with new content added regularly.",
     items: [
@@ -149,9 +148,9 @@ export const site = {
   /** Two ways to work with TBM. The membership is the main offer. */
   plans: {
     membership: {
-      name: "Desi Body Reset",
+      name: "The Membership",
       badge: "Founding member price",
-      price: "$10",
+      price: "£9.99",
       period: "/month",
       blurb: "Our online membership. Everything you need to train, eat and progress on your own, with coach support.",
       features: [
@@ -161,7 +160,7 @@ export const site = {
         "Exercise tutorials & strength guides",
         "Community with direct coach access",
       ],
-      cta: "Join on Skool",
+      cta: "Join the Membership",
       href: SKOOL_URL,
     },
     coaching: {
@@ -225,7 +224,7 @@ export const site = {
 
   faq: [
     {
-      q: "What is Desi Body Reset?",
+      q: "What is the Team Bodymechanik Membership?",
       a: "It's our online membership on Skool for South Asian women and men who want to lose fat, build muscle and get healthier without giving up Indian food. You get workouts, recipes, calculators, guides and a community where you can ask Coach Krish and Coach Nicky questions.",
     },
     {
@@ -242,7 +241,7 @@ export const site = {
     },
     {
       q: "How do I access it?",
-      a: "Desi Body Reset runs on Skool. Once you join you can use it in your web browser or in the free Skool app on your phone.",
+      a: "The membership runs on Skool, a members' platform. Once you join you can use it in your web browser or in the free Skool app on your phone.",
     },
     {
       q: "What's the difference between the membership and 1:1 coaching?",

@@ -107,7 +107,7 @@ export default function Header() {
             rel="noopener noreferrer"
             className="btn btn-sm hidden sm:inline-flex"
           >
-            Join {site.membership.name}
+            Join the Membership
           </a>
 
           <button
@@ -148,7 +148,7 @@ export default function Header() {
                 style={{ "--i": site.nav.length } as React.CSSProperties}
                 className="btn mt-6"
               >
-                Join {site.membership.name}
+                Join the Membership
               </a>
             </nav>
           </div>

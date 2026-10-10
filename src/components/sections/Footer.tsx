@@ -19,7 +19,7 @@ export default function Footer() {
 
         <div>
           <h4 className="display mb-2 text-xl text-gold-2">{site.name}</h4>
-          <p className="m-0 text-sm text-muted">Home of Desi Body Reset — South Asian fitness and fat loss coaching.</p>
+          <p className="m-0 text-sm text-muted">Online fitness membership and 1:1 coaching for fat loss and muscle building.</p>
           <div className="mt-4 flex flex-wrap gap-4">
             {site.socials.map((s) => (
               <a
