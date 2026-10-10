@@ -2,19 +2,23 @@
  * All copy, links and lists for the site live here, so text edits never
  * require hunting through components.
  */
+
+/** The Desi Body Reset membership lives on Skool — every "Join" button goes here. */
+const SKOOL_URL = "https://www.skool.com/desi-body-reset-by-tbm-9772/about";
+
 export const site = {
   name: "Team Bodymechanik",
   url: "https://www.teambodymechanik.com",
-  title: "Team Bodymechanik | Online Coaching",
+  title: "Desi Body Reset | Team Bodymechanik",
   description:
-    "Team Bodymechanik — premium online coaching for fat loss, muscle building and body transformation.",
+    "Desi Body Reset by Team Bodymechanik — South Asian fitness and fat loss coaching. Home and gym workouts, high-protein Desi recipes and coach support, without giving up the food you love.",
 
   nav: [
-    { label: "Coaching", href: "#coaching" },
-    { label: "What's Included", href: "#included" },
-    { label: "How It Works", href: "#method" },
     { label: "Results", href: "#results" },
+    { label: "The Membership", href: "#membership" },
+    { label: "How It Works", href: "#method" },
     { label: "Testimonials", href: "#testimonials" },
+    { label: "Pricing", href: "#pricing" },
     { label: "About Us", href: "#about" },
     { label: "FAQ", href: "#faq" },
     { label: "Contact Us", href: "#contact" },
@@ -28,126 +32,156 @@ export const site = {
   motto: "Discipline builds freedom",
   promise: "Real experience. Real support. Real results.",
 
+  /** The main product. Prices are shown exactly as they appear on Skool. */
+  membership: {
+    name: "Desi Body Reset",
+    by: "by TBM",
+    tagline: "South Asian fitness and fat loss coaching",
+    url: SKOOL_URL,
+    price: "$10",
+    period: "month",
+    priceNote: "Founding member price",
+    cta: "Join Desi Body Reset",
+  },
+
   hero: {
-    eyebrow: "Premium online body transformation coaching",
+    eyebrow: "Desi Body Reset — now open on Skool",
+    lines: [
+      { text: "Transform", gold: false },
+      { text: "Your Body.", gold: true },
+      { text: "Keep Your Food.", gold: false },
+    ],
     lead:
-      "Structured nutrition, progressive training and real accountability for women and men who are ready to stop guessing and start getting results.",
+      "Our online membership for South Asian women and men. Home and gym workouts, high-protein Desi recipes and direct access to your coaches — so you can lose fat and build muscle without giving up the Indian food you love.",
     features: [
-      { title: "Tailored Nutrition", text: "Built around your goal and lifestyle" },
-      { title: "Progressive Training", text: "A clear structure with purpose" },
-      { title: "Weekly Coaching", text: "Data, feedback and accountability" },
+      { title: "Home & Gym Workouts", text: "Follow-along training with exercise tutorials" },
+      { title: "Desi Nutrition", text: "Recipes, macros and smart food swaps" },
+      { title: "Coach Community", text: "Ask Krish & Nicky anything" },
     ],
   },
 
   stats: [
-    { value: "1:1", label: "Personalised Coaching" },
-    { value: "Weekly", label: "Progress Reviews" },
-    { value: "Data-Led", label: "Plan Adjustments" },
-    { value: "Real", label: "Accountability" },
+    { value: "Hundreds", label: "Of clients coached" },
+    { value: "Home & Gym", label: "Workout plans" },
+    { value: "Desi", label: "Recipes & food swaps" },
+    { value: "$10", label: "Per month" },
   ],
 
   ticker: [
     "Discipline Builds Freedom",
     "Better Habits",
     "A Stronger You",
-    "A Brighter Future",
+    "Keep Your Food",
     "Results That Last",
   ],
 
-  /** The five outcomes from the coaching flyer. */
-  outcomes: [
-    { icon: "dumbbell", line1: "Build", line2: "Strength" },
-    { icon: "flame", line1: "Lose", line2: "Body Fat" },
-    { icon: "pulse", line1: "Improve", line2: "Health" },
-    { icon: "chart", line1: "Gain", line2: "Confidence" },
-    { icon: "lotus", line1: "Create a", line2: "Better You" },
-  ],
-
-  /** "What you'll receive" — the eight things coaching includes. */
-  included: {
-    title: "What you'll receive",
-    subtitle: "More than just a plan — real support every step of the way",
+  /** What members get inside Desi Body Reset (from the Skool community page). */
+  inside: {
+    title: "Inside Desi Body Reset",
+    subtitle:
+      "Everything we use with our 1:1 clients, in one place — with new content added regularly.",
     items: [
       {
+        icon: "calculator",
+        title: "Calorie & Macro Calculators",
+        text: "Work out exactly how much to eat for fat loss or muscle gain — the same tools we use with our coaching clients.",
+      },
+      {
         icon: "fork",
-        title: "Personalised Nutrition Plan",
-        text: "Tailored to your goals, food preferences, lifestyle and cultural needs.",
+        title: "High-Protein Desi Recipes",
+        text: "Meal ideas and healthier versions of the Indian dishes you already love.",
+      },
+      {
+        icon: "swap",
+        title: "Smart Food Swaps",
+        text: "Simple swaps that cut calories without cutting out your favourite foods.",
+      },
+      {
+        icon: "home",
+        title: "Home & Gym Workouts",
+        text: "Structured plans whether you train at home or in the gym.",
+      },
+      {
+        icon: "play",
+        title: "Exercise Tutorials",
+        text: "Video walkthroughs so you train with good form and confidence.",
       },
       {
         icon: "dumbbell",
-        title: "Personalised Training Plan",
-        text: "Designed around your goals, training experience, available equipment and any injuries or limitations.",
-      },
-      {
-        icon: "app",
-        title: "Access to Our Coaching App",
-        text: "Log workouts, food photos, progress pictures and track your results — all in one place.",
-      },
-      {
-        icon: "people",
-        title: "Ongoing Accountability",
-        text: "We're with you every step of the way to make sure you stay on track and get results.",
-      },
-      {
-        icon: "chart",
-        title: "Weekly Check-ins & Progress Reports",
-        text: "We review your progress, make adjustments and keep you accountable.",
-      },
-      {
-        icon: "chat",
-        title: "Direct Messaging Support",
-        text: "Ask questions, get advice and receive ongoing guidance throughout your journey.",
+        title: "Strength Training Guides",
+        text: "Learn how to progress your lifts and build muscle properly.",
       },
       {
         icon: "education",
-        title: "Education & Guidance",
-        text: "Learn the \u2018why\u2019 behind nutrition, training and habits so you can maintain results long term.",
+        title: "Nutrition Education",
+        text: "Understand the ‘why’ so you can keep your results for life.",
       },
       {
-        icon: "heart",
-        title: "A Supportive Community",
-        text: "Be part of a like-minded community that motivates and inspires you.",
+        icon: "people",
+        title: "Community & Coach Access",
+        text: "Ask questions, share progress and learn directly from Coach Krish and Coach Nicky.",
       },
     ],
   },
 
-  pricing: {
-    script: "Your transformation starts here",
-    terms: [
-      { icon: "calendar", value: "3 month", label: "Minimum commitment" },
-      { icon: "price", value: "£250", label: "Per month" },
+  method: {
+    heading: { plain: "Join. Set up. Follow.", gold: "Progress." },
+    steps: [
+      {
+        title: "Join",
+        text: "Sign up on Skool and get instant access to the full membership on your phone or computer.",
+      },
+      {
+        title: "Set Up",
+        text: "Use the calculators to set your calories and macros for your goal.",
+      },
+      {
+        title: "Follow",
+        text: "Pick your home or gym plan and cook from the Desi recipe library.",
+      },
+      {
+        title: "Progress",
+        text: "Post questions and wins in the community and get answers from your coaches.",
+      },
     ],
-    note: "Invest in a stronger, healthier, more confident you.",
-    cta: "Let's build your stronger tomorrow",
   },
 
-  coaching: [
-    "Personalised nutrition and meal structure",
-    "Progressive training programming",
-    "Weekly check-ins and plan adjustments",
-    "Daily accountability standards",
-    "Progress tracking through photos, weight and training data",
-    "Education that helps you keep the result",
-  ],
-
-  method: [
-    {
-      title: "Assess",
-      text: "We establish your starting point, goals, lifestyle, training history and current habits.",
+  /** Two ways to work with TBM. The membership is the main offer. */
+  plans: {
+    membership: {
+      name: "Desi Body Reset",
+      badge: "Founding member price",
+      price: "$10",
+      period: "/month",
+      blurb: "Our online membership. Everything you need to train, eat and progress on your own, with coach support.",
+      features: [
+        "Calorie & macro calculators",
+        "High-protein Desi recipes & food swaps",
+        "Home & gym workout plans",
+        "Exercise tutorials & strength guides",
+        "Community with direct coach access",
+      ],
+      cta: "Join on Skool",
+      href: SKOOL_URL,
     },
-    {
-      title: "Build",
-      text: "Your nutrition, training, steps and cardio are structured around what you actually need.",
+    coaching: {
+      name: "1:1 Coaching",
+      badge: "Fully personalised",
+      price: "£250",
+      period: "/month",
+      blurb: "Fully personalised coaching for people who want a plan built only for them. 3 month minimum.",
+      features: [
+        "Personalised nutrition and meal structure",
+        "Progressive training programming",
+        "Weekly check-ins and plan adjustments",
+        "Progress tracking in our coaching app",
+        "Direct messaging support",
+      ],
+      cta: "Apply for 1:1 Coaching",
+      href: "#apply",
+      terms: "3 month minimum",
     },
-    {
-      title: "Adjust",
-      text: "We review the data weekly and make evidence-led changes when your progress requires them.",
-    },
-    {
-      title: "Achieve",
-      text: "You build the physique, habits and understanding needed to maintain your results long term.",
-    },
-  ],
+  },
 
   transformations: [1, 2, 3, 4, 5, 6].map((n) => ({
     src: `/images/transformation-${n}.webp`,
@@ -191,20 +225,28 @@ export const site = {
 
   faq: [
     {
-      q: "Who is Team Bodymechanik coaching for?",
-      a: "Adults who want structured coaching for fat loss, body recomposition, muscle building and improved fitness.",
+      q: "What is Desi Body Reset?",
+      a: "It's our online membership on Skool for South Asian women and men who want to lose fat, build muscle and get healthier without giving up Indian food. You get workouts, recipes, calculators, guides and a community where you can ask Coach Krish and Coach Nicky questions.",
     },
     {
-      q: "Is the coaching online?",
-      a: "Yes. Your nutrition, training, check-ins, progress tracking and coaching communication are delivered online.",
+      q: "Do I need a gym?",
+      a: "No. There are workout plans for home and for the gym, so you can start wherever you train.",
     },
     {
-      q: "Do I need to be experienced in the gym?",
-      a: "No. Your programme is built around your current level and progresses from there.",
+      q: "Do I have to stop eating Indian food?",
+      a: "No — that's the whole point. You'll learn how to fit the food you love into your goals, with high-protein Desi recipes and simple swaps.",
     },
     {
-      q: "Will my plan change?",
-      a: "Yes, when the data shows that a change is needed. Adjustments are based on progress, adherence and performance rather than guesswork.",
+      q: "I'm a complete beginner. Is this for me?",
+      a: "Yes. The exercise tutorials and guides start from the basics, and you can ask the coaches and community whenever you're unsure.",
+    },
+    {
+      q: "How do I access it?",
+      a: "Desi Body Reset runs on Skool. Once you join you can use it in your web browser or in the free Skool app on your phone.",
+    },
+    {
+      q: "What's the difference between the membership and 1:1 coaching?",
+      a: "The membership gives you our tools, plans and community to follow at your own pace. 1:1 coaching is fully personalised: your own nutrition and training plan, weekly check-ins and direct messaging with your coach.",
     },
   ],
 

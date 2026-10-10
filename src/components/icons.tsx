@@ -113,6 +113,20 @@ const GLYPHS: Record<string, React.ReactNode> = {
     </>
   ),
   heart: <path d="M12 20s-7-4.4-7-9.2A4 4 0 0 1 12 8a4 4 0 0 1 7 2.8C19 15.6 12 20 12 20Z" />,
+  calculator: (
+    <>
+      <rect x="5" y="2.5" width="14" height="19" rx="2" />
+      <path d="M8 6.5h8v3H8zM8.5 13h.01M12 13h.01M15.5 13h.01M8.5 17h.01M12 17h.01M15.5 17h.01" />
+    </>
+  ),
+  swap: <path d="M4 8h13l-3.5-3.5M20 16H7l3.5 3.5" />,
+  home: <path d="M3.5 11 12 4l8.5 7M6 9.5V20h12V9.5M10 20v-5h4v5" />,
+  play: (
+    <>
+      <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+      <path d="m10 9 5 3-5 3Z" />
+    </>
+  ),
   calendar: (
     <>
       <rect x="3.5" y="5" width="17" height="15" rx="2" />

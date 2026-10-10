@@ -3,12 +3,12 @@ import { InstagramIcon } from "../icons";
 import { site } from "@/lib/site";
 
 const LINKS = [
-  { label: "Coaching", href: "#coaching" },
+  { label: "The Membership", href: "#membership" },
   { label: "Results", href: "#results" },
+  { label: "Pricing", href: "#pricing" },
   { label: "About Us", href: "#about" },
-  { label: "Recipes", href: "#recipes" },
+  { label: "1:1 Coaching", href: "#apply" },
   { label: "Contact Us", href: "#contact" },
-  { label: "Apply", href: "#apply" },
 ];
 
 export default function Footer() {
@@ -19,7 +19,7 @@ export default function Footer() {
 
         <div>
           <h4 className="display mb-2 text-xl text-gold-2">{site.name}</h4>
-          <p className="m-0 text-sm text-muted">Premium online body transformation coaching.</p>
+          <p className="m-0 text-sm text-muted">Home of Desi Body Reset — South Asian fitness and fat loss coaching.</p>
           <div className="mt-4 flex flex-wrap gap-4">
             {site.socials.map((s) => (
               <a

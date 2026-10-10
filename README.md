@@ -1,10 +1,10 @@
 # Team Bodymechanik — Website
 
 The Team Bodymechanik coaching site, built with Next.js 16 (App Router) and
-Tailwind CSS v4. It's a single long page: hero, stats, the five outcomes, recipe signup,
-coaching programme, what's included with pricing, how it works,
-transformations, about, testimonials, FAQ, contact and the coaching
-application.
+Tailwind CSS v4. It's a single long page that sells the Desi Body Reset membership on Skool:
+hero, stats, transformations, what's inside the membership, how it works,
+testimonials, pricing (membership vs 1:1 coaching), about, FAQ, and the 1:1
+coaching application / contact form.
 
 ```bash
 npm install
@@ -18,7 +18,7 @@ Deploying to sPanel is covered step by step in [DEPLOY.md](DEPLOY.md).
 
 | Path | What's in it |
 |---|---|
-| [`src/lib/site.ts`](src/lib/site.ts) | **All copy** — nav, stats, coaching list, steps, testimonials, FAQ, goals, social links |
+| [`src/lib/site.ts`](src/lib/site.ts) | **All copy** — Skool link and price, nav, stats, membership contents, plans, steps, testimonials, FAQ, social links |
 | `src/components/sections/` | One file per page section |
 | [`src/components/Header.tsx`](src/components/Header.tsx) | Sticky header, active-section highlight, scroll progress, mobile menu, back-to-top |
 | [`src/app/api/contact/route.ts`](src/app/api/contact/route.ts) | The one endpoint every form posts to |

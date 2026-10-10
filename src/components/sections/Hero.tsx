@@ -14,11 +14,7 @@ const EMBERS = [
   { left: "50%", dur: "15s", delay: "5s", drift: "14px" },
 ];
 
-const LINES = [
-  { text: "Transform", gold: false },
-  { text: "Your Body.", gold: true },
-  { text: "Change Your Life.", gold: false },
-];
+const LINES = site.hero.lines;
 
 export default function Hero() {
   return (
@@ -70,17 +66,17 @@ export default function Hero() {
             className="fade-up flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5"
             style={{ "--d": "780ms" } as React.CSSProperties}
           >
-            <a className="btn" href="#apply">
-              Apply for Coaching
+            <a className="btn" href={site.membership.url} target="_blank" rel="noopener noreferrer">
+              Join for {site.membership.price}/{site.membership.period}
             </a>
-            <a className="btn btn-outline" href="#contact">
-              Contact Us
+            <a className="btn btn-outline" href="#results">
+              See the Results
             </a>
             <a
               className="group inline-flex items-center justify-center gap-2 py-2 text-[13px] font-extrabold text-[#e4c55a] hover:text-gold-2"
-              href="#coaching"
+              href="#pricing"
             >
-              Explore the programme
+              Prefer 1:1 coaching?
               <ArrowRightIcon className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </div>

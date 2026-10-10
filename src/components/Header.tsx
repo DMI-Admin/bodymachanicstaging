@@ -101,8 +101,13 @@ export default function Header() {
             ))}
           </nav>
 
-          <a href="#apply" className="btn btn-sm hidden sm:inline-flex">
-            Apply for Coaching
+          <a
+            href={site.membership.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-sm hidden sm:inline-flex"
+          >
+            Join {site.membership.name}
           </a>
 
           <button
@@ -135,13 +140,15 @@ export default function Header() {
                 </a>
               ))}
               <a
-                href="#apply"
+                href={site.membership.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 tabIndex={open ? 0 : -1}
                 onClick={() => setOpen(false)}
                 style={{ "--i": site.nav.length } as React.CSSProperties}
                 className="btn mt-6"
               >
-                Apply for Coaching
+                Join {site.membership.name}
               </a>
             </nav>
           </div>

@@ -13,7 +13,7 @@ export default function Method() {
             How it works
           </p>
           <h2 className="display h2" data-reveal style={{ "--d": "80ms" } as React.CSSProperties}>
-            Assess. Build. Adjust. <span className="shine-text">Achieve.</span>
+            {site.method.heading.plain} <span className="shine-text">{site.method.heading.gold}</span>
           </h2>
         </div>
 
@@ -24,7 +24,7 @@ export default function Method() {
             data-reveal="scale"
             aria-hidden="true"
           />
-          {site.method.map((step, i) => (
+          {site.method.steps.map((step, i) => (
             <li
               key={step.title}
               className="card p-7 lg:min-h-[295px]"
