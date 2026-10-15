@@ -9,7 +9,6 @@ import Hero from "@/components/sections/Hero";
 import Included from "@/components/sections/Included";
 import Method from "@/components/sections/Method";
 import Outcomes from "@/components/sections/Outcomes";
-import RecipeStrip from "@/components/sections/RecipeStrip";
 import Results from "@/components/sections/Results";
 import Stats from "@/components/sections/Stats";
 import Testimonials from "@/components/sections/Testimonials";
@@ -22,7 +21,6 @@ export default function Home() {
         <Hero />
         <Stats />
         <Outcomes />
-        <RecipeStrip />
         <Coaching />
         <Included />
         <Method />

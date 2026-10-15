@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 export default function Coaching() {
   return (
     <section id="coaching" className="py-20 sm:py-28">
-      <div className="shell grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+      <div className="shell grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
         <div>
           <p className="eyebrow" data-reveal>
             Our coaching programme
@@ -18,45 +18,35 @@ export default function Coaching() {
             around your body, your schedule, your training ability and the result you want to achieve.
           </p>
 
-          <ul className="my-8 grid list-none gap-3 p-0">
-            {site.coaching.map((item, i) => (
-              <li
-                key={item}
-                className="check-item text-[#e6e0d2]"
-                data-reveal="left"
-                style={{ "--d": `${200 + i * 70}ms` } as React.CSSProperties}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <div data-reveal style={{ "--d": "300ms" } as React.CSSProperties}>
+          <div className="mt-8 flex flex-wrap gap-4" data-reveal style={{ "--d": "240ms" } as React.CSSProperties}>
             <a className="btn" href="#apply">
               Start Your Application
+            </a>
+            <a className="btn btn-outline" href="#included">
+              See What&rsquo;s Included
             </a>
           </div>
         </div>
 
         <div
-          className="card flex flex-col justify-center p-7 sm:p-12 lg:min-h-[480px]"
+          className="card p-7 sm:p-10 lg:p-12"
           data-reveal="right"
           data-accent="true"
           style={{ "--d": "150ms" } as React.CSSProperties}
         >
-          <p className="eyebrow">TBM Recipes</p>
-          <h3 className="display text-[clamp(32px,4vw,44px)]">
-            High-protein food.
-            <br />
-            <span>Without boring meals.</span>
-          </h3>
-          <p className="my-6 max-w-[480px] text-muted">
-            Get Team Bodymechanik recipes, macro-friendly ideas and healthier versions of the foods you actually want
-            to eat.
-          </p>
-          <a className="btn self-start" href="#recipes">
-            Subscribe to Recipes
-          </a>
+          <p className="eyebrow">Every client gets</p>
+          <ul className="grid list-none gap-3.5 p-0">
+            {site.coaching.map((item, i) => (
+              <li
+                key={item}
+                className="check-item text-[15px] text-[#e6e0d2]"
+                data-reveal
+                style={{ "--d": `${220 + i * 70}ms` } as React.CSSProperties}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export type FormKind = "contact" | "apply" | "recipes";
+export type FormKind = "contact" | "apply";
 export type FormState = "idle" | "submitting" | "success" | "error";
 
 /**

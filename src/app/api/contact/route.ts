@@ -8,7 +8,6 @@ import { site } from "@/lib/site";
  *
  *   contact  — name, email, message
  *   apply    — name, email, goal, optional message
- *   recipes  — email only
  */
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -58,7 +57,7 @@ export async function POST(request: Request) {
   }
 
   const kind = body.kind ?? "contact";
-  if (kind !== "contact" && kind !== "apply" && kind !== "recipes") return bad();
+  if (kind !== "contact" && kind !== "apply") return bad();
 
   // Honeypot filled in => bot. Answer as if it worked, send nothing.
   if (typeof body.company === "string" && body.company.trim() !== "") {
@@ -81,7 +80,7 @@ export async function POST(request: Request) {
   const message = str("message");
   const goal = singleLine(str("goal"));
 
-  if (kind !== "recipes" && (!name || name.length > LIMITS.name)) return bad();
+  if (!name || name.length > LIMITS.name) return bad();
   if (message.length > LIMITS.message) return bad();
   if (kind === "contact" && !message) return bad();
   if (kind === "apply" && !(site.goals as readonly string[]).includes(goal)) return bad();
@@ -108,24 +107,16 @@ export async function POST(request: Request) {
           message: message || undefined,
           success: "Application received. We'll review it and be in touch personally.",
         }
-      : kind === "recipes"
-        ? {
-            heading: "Recipe subscriber",
-            subject: `New recipe subscriber: ${email}`,
-            rows: [["Email", email]] as [string, string][],
-            message: undefined,
-            success: "You're on the list — recipes are on their way.",
-          }
-        : {
-            heading: "New message",
-            subject: `New message from ${name}`,
-            rows: [
-              ["Name", name],
-              ["Email", email],
-            ] as [string, string][],
-            message,
-            success: "Message sent. We'll get back to you soon.",
-          };
+      : {
+          heading: "New message",
+          subject: `New message from ${name}`,
+          rows: [
+            ["Name", name],
+            ["Email", email],
+          ] as [string, string][],
+          message,
+          success: "Message sent. We'll get back to you soon.",
+        };
 
   try {
     const id = await sendNotification(config, { ...notification, replyTo: email });

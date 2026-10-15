@@ -1,10 +1,10 @@
 # Team Bodymechanik — Website
 
 The Team Bodymechanik coaching site, built with Next.js 16 (App Router) and
-Tailwind CSS v4. It's a single long page: hero, stats, the five outcomes, recipe signup,
-coaching programme, what's included with pricing, how it works,
-transformations, about, testimonials, FAQ, contact and the coaching
-application.
+Tailwind CSS v4. It's a single long page: hero, stats, the five outcomes, coaching
+programme, what's included with pricing, how it works, transformations,
+about, testimonials, FAQ, and the combined contact / coaching application
+form.
 
 ```bash
 npm install
@@ -48,11 +48,10 @@ it keeps image resizing off a host that limits per-process memory.
 
 ## Forms
 
-All three forms post to `POST /api/contact` with a `kind`:
+Both forms post to `POST /api/contact` with a `kind`:
 
 | Form | `kind` | Required fields |
 |---|---|---|
-| Recipe signup | `recipes` | email |
 | Enquiry — "a general question" | `contact` | name, email, message |
 | Enquiry — "applying for coaching" | `apply` | name, email, goal (one of `site.goals`); message optional |
 
@@ -62,8 +61,7 @@ the server validates accordingly; picking "applying for coaching" reveals the
 Goal field. Both `#apply` and `#contact` links land on that section.
 
 Each sends a notification email to `CONTACT_TO_EMAIL` with the visitor's address
-as `Reply-To`, so replying goes straight back to them. Recipe signups are emailed
-to you too — there's no mailing-list integration yet.
+as `Reply-To`, so replying goes straight back to them.
 
 Configure in `.env.local` (see [`.env.example`](.env.example)):
 
