@@ -37,7 +37,7 @@ export const site = {
     name: "Team Bodymechanik Membership",
     tagline: "South Asian fitness and fat loss coaching",
     url: SKOOL_URL,
-    price: "£9.99",
+    price: "£14.99",
     period: "month",
     priceNote: "Founding member price",
     cta: "Join the Membership",
@@ -63,7 +63,7 @@ export const site = {
     { value: "Hundreds", label: "Of clients coached" },
     { value: "Home & Gym", label: "Workout plans" },
     { value: "Desi", label: "Recipes & food swaps" },
-    { value: "£9.99", label: "Per month" },
+    { value: "£14.99", label: "Per month" },
   ],
 
   ticker: [
@@ -150,7 +150,7 @@ export const site = {
     membership: {
       name: "The Membership",
       badge: "Founding member price",
-      price: "£9.99",
+      price: "£14.99",
       period: "/month",
       blurb: "Our online membership. Everything you need to train, eat and progress on your own, with coach support.",
       features: [
