@@ -45,10 +45,12 @@ export default function Pricing() {
               </span>
               <h3 className="display mt-4 text-[clamp(26px,3vw,32px)] text-gold-2">{plan.name}</h3>
 
-              <p className="mt-5 flex items-baseline gap-1.5">
-                <strong className="font-display text-[52px] leading-none text-cream">{plan.price}</strong>
-                <span className="text-sm text-muted">{plan.period}</span>
-              </p>
+              {plan.price && (
+                <p className="mt-5 flex items-baseline gap-1.5">
+                  <strong className="font-display text-[52px] leading-none text-cream">{plan.price}</strong>
+                  <span className="text-sm text-muted">{plan.period}</span>
+                </p>
+              )}
 
               <p className="mt-4 text-[15px] text-muted">{plan.blurb}</p>
 

@@ -64,13 +64,7 @@ export default function Membership() {
             <p className="mt-2 text-sm text-muted">{membership.tagline}</p>
           </div>
 
-          <div className="flex flex-1 items-center justify-center gap-3 xl:justify-start">
-            <strong className="font-display text-[44px] leading-none text-cream">{membership.price}</strong>
-            <span>
-              <span className="block text-[11px] tracking-[0.12em] whitespace-nowrap text-muted uppercase">per {membership.period}</span>
-              <span className="block text-[11px] tracking-[0.12em] whitespace-nowrap text-gold-2 uppercase">{membership.priceNote}</span>
-            </span>
-          </div>
+          <div className="hidden flex-1 xl:block" aria-hidden="true" />
 
           <a
             href={membership.url}

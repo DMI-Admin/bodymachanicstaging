@@ -32,14 +32,11 @@ export const site = {
   motto: "Discipline builds freedom",
   promise: "Real experience. Real support. Real results.",
 
-  /** The main product. Prices are shown exactly as they appear on Skool. */
+  /** The main product. No price is shown on the site for now. */
   membership: {
     name: "Team Bodymechanik Membership",
     tagline: "South Asian fitness and fat loss coaching",
     url: SKOOL_URL,
-    price: "£14.99",
-    period: "month",
-    priceNote: "Founding member price",
     cta: "Join the Membership",
   },
 
@@ -63,7 +60,7 @@ export const site = {
     { value: "Hundreds", label: "Of clients coached" },
     { value: "Home & Gym", label: "Workout plans" },
     { value: "Desi", label: "Recipes & food swaps" },
-    { value: "£14.99", label: "Per month" },
+    { value: "Direct", label: "Coach access" },
   ],
 
   ticker: [
@@ -149,9 +146,9 @@ export const site = {
   plans: {
     membership: {
       name: "The Membership",
-      badge: "Founding member price",
-      price: "£14.99",
-      period: "/month",
+      badge: "Now open",
+      price: "",
+      period: "",
       blurb: "Our online membership. Everything you need to train, eat and progress on your own, with coach support.",
       features: [
         "Calorie & macro calculators",

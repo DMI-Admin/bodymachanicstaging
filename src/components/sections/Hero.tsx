@@ -67,7 +67,7 @@ export default function Hero() {
             style={{ "--d": "780ms" } as React.CSSProperties}
           >
             <a className="btn" href={site.membership.url} target="_blank" rel="noopener noreferrer">
-              Join for {site.membership.price}/{site.membership.period}
+              {site.membership.cta}
             </a>
             <a className="btn btn-outline" href="#results">
               See the Results

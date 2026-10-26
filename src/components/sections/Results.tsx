@@ -81,7 +81,7 @@ export default function Results() {
             Get the same training, nutrition and coach support inside the {site.membership.name}.
           </p>
           <a className="btn" href={site.membership.url} target="_blank" rel="noopener noreferrer">
-            Start for {site.membership.price}/{site.membership.period}
+            {site.membership.cta}
           </a>
         </div>
       </div>
