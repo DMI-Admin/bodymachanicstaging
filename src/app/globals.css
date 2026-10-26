@@ -387,6 +387,22 @@ main {
   animation: breathe 9s ease-in-out infinite;
 }
 
+/* Page intro: the hero's background and text wait for the fonts, then come in
+   together. `ready` is set by the inline script in layout.tsx (fonts loaded,
+   or 0.8s at most), so nothing ever shows a bare background or a font swap. */
+.js .hero {
+  transition: opacity 0.7s var(--ease-out-expo);
+}
+
+.js:not(.ready) .hero {
+  opacity: 0;
+}
+
+.js:not(.ready) .hero *,
+.js:not(.ready) .hero *::before {
+  animation-play-state: paused !important;
+}
+
 /* Heading lines rise out of a clipped mask, one after another */
 .line-mask {
   display: block;
@@ -455,8 +471,8 @@ main {
   z-index: 2;
   filter: drop-shadow(0 22px 70px rgba(212, 175, 55, 0.28));
   animation:
-    logo-in 1.4s var(--ease-out-expo) 0.2s both,
-    float 7s ease-in-out 1.6s infinite;
+    logo-in 1.2s var(--ease-out-expo) 0.1s both,
+    float 7s ease-in-out 1.3s infinite;
 }
 
 /* Rising embers */
@@ -649,29 +665,84 @@ main {
 }
 
 /* ==================================================================
-   Testimonials — swipe row on phones, grid above
+   Carousel — transformations and testimonials
+   Native scroll-snap does the swiping; one slide per view on phones (with a
+   peek of the next), two on tablets, three on desktop.
 ================================================================== */
-@media (max-width: 649px) {
-  .testimonial-track {
-    display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    padding-bottom: 6px;
-    margin-inline: -16px;
-    padding-inline: 16px;
-    scroll-padding-inline: 16px;
-  }
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding-block: 4px;
+}
 
-  .testimonial-track::-webkit-scrollbar {
-    display: none;
-  }
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
 
-  .testimonial-track > * {
-    flex: 0 0 86%;
-    scroll-snap-align: start;
+.carousel-track:focus-visible {
+  outline: 1px solid var(--color-gold);
+  outline-offset: 6px;
+}
+
+.carousel-slide {
+  flex: 0 0 86%;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 640px) {
+  .carousel-slide {
+    flex-basis: calc((100% - 20px) / 2);
   }
+}
+
+@media (min-width: 1024px) {
+  .carousel-slide {
+    flex-basis: calc((100% - 40px) / 3);
+  }
+}
+
+.carousel-arrow {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold-2);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.carousel-arrow:hover:not(:disabled) {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+.carousel-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.3);
+  transition:
+    width 0.4s var(--ease-out-expo),
+    background-color 0.3s ease;
+}
+
+.carousel-dot[aria-current="true"] {
+  width: 26px;
+  background: var(--color-gold);
 }
 
 /* ==================================================================

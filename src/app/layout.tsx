@@ -46,13 +46,17 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
+const INTRO_SCRIPT = "(function(){var d=document.documentElement;d.classList.add('js');var done=0;function ready(){if(!done){done=1;d.classList.add('ready')}}try{document.fonts.ready.then(ready)}catch(e){}setTimeout(ready,800);function reveal(){var els=document.querySelectorAll('[data-reveal]');if(!('IntersectionObserver' in window)){for(var i=0;i<els.length;i++)els[i].classList.add('is-visible');return}var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px',threshold:0.12});for(var j=0;j<els.length;j++)io.observe(els[j])}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',reveal);else reveal()})();";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${oswald.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
-        {/* Runs before first paint: scroll-reveal styles only apply once we know
-            JS is available to reveal the content again. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        {/* Runs before first paint. Marks the page as having JS (so reveal styles
+            apply), adds `ready` once the fonts have loaded (0.8s at most) so the
+            hero's background and text come in together, and reveals sections as
+            they scroll into view without waiting for React to load. */}
+        <script dangerouslySetInnerHTML={{ __html: INTRO_SCRIPT }} />
       </head>
       <body>{children}</body>
     </html>

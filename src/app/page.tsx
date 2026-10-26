@@ -1,5 +1,4 @@
 import Header from "@/components/Header";
-import RevealObserver from "@/components/RevealObserver";
 import About from "@/components/sections/About";
 import Enquiry from "@/components/sections/Enquiry";
 import Faq from "@/components/sections/Faq";
@@ -34,7 +33,6 @@ export default function Home() {
         <Enquiry />
       </main>
       <Footer />
-      <RevealObserver />
     </>
   );
 }

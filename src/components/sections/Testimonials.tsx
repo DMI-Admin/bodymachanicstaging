@@ -1,3 +1,4 @@
+import Carousel from "../Carousel";
 import { QuoteIcon } from "../icons";
 import { site } from "@/lib/site";
 
@@ -18,16 +19,15 @@ export default function Testimonials() {
           </p>
         </div>
 
-        <div className="testimonial-track sm:grid sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-          {site.testimonials.map((t, i) => {
+        <div data-reveal style={{ "--d": "200ms" } as React.CSSProperties}>
+          <Carousel label="What our clients say">
+          {site.testimonials.map((t) => {
             const featured = "featured" in t && t.featured;
             return (
               <blockquote
                 key={t.name}
-                className="card m-0 flex flex-col p-7 sm:p-8"
+                className="card m-0 flex h-full flex-col p-7 sm:p-8"
                 data-accent={featured || undefined}
-                data-reveal
-                style={{ "--d": `${(i % 3) * 110}ms` } as React.CSSProperties}
               >
                 <QuoteIcon className="mb-5 h-7 w-9 text-gold-2" />
                 <p className={`m-0 flex-1 leading-[1.75] text-[#e8e3d9] text-[15px]`}>
@@ -47,8 +47,8 @@ export default function Testimonials() {
               </blockquote>
             );
           })}
+          </Carousel>
         </div>
-        <p className="mt-4 text-center text-xs text-muted sm:hidden">Swipe for more →</p>
       </div>
     </section>
   );

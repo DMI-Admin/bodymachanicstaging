@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Carousel from "../Carousel";
 import { ChevronIcon, CloseIcon, PlusIcon } from "../icons";
 import { site } from "@/lib/site";
 
@@ -44,19 +45,18 @@ export default function Results() {
             <span className="shine-text">Transformations</span>
           </h2>
           <p className="copy mx-auto mt-4" data-reveal style={{ "--d": "160ms" } as React.CSSProperties}>
-            Before-and-after results from Team Bodymechanik clients. Tap any result to see it full size.
+            Before-and-after results from Team Bodymechanik clients. Swipe through, and tap any result to see it full size.
           </p>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div data-reveal style={{ "--d": "200ms" } as React.CSSProperties}>
+          <Carousel label="Client transformations">
           {items.map((item, i) => (
             <button
               key={item.src}
               type="button"
               onClick={() => open(i)}
-              className="result-card card block overflow-hidden p-0 text-left"
-              data-reveal="scale"
-              style={{ "--d": `${(i % 3) * 110}ms` } as React.CSSProperties}
+              className="result-card card block w-full overflow-hidden p-0 text-left"
               aria-label={`View ${item.title} full size`}
             >
               <div className="relative aspect-square overflow-hidden bg-ink-2">
@@ -74,15 +74,7 @@ export default function Results() {
               </div>
             </button>
           ))}
-        </div>
-
-        <div className="mt-12 flex flex-col items-center gap-4 text-center" data-reveal>
-          <p className="copy mx-auto">
-            Get the same training, nutrition and coach support inside the {site.membership.name}.
-          </p>
-          <a className="btn" href={site.membership.url} target="_blank" rel="noopener noreferrer">
-            {site.membership.cta}
-          </a>
+          </Carousel>
         </div>
       </div>
 

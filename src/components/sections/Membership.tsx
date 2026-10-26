@@ -1,9 +1,9 @@
-import { ArrowRightIcon, Glyph } from "../icons";
+import { Glyph } from "../icons";
 import { site } from "@/lib/site";
 
-/** What members get inside the membership, then a join prompt. */
+/** What members get inside the membership. */
 export default function Membership() {
-  const { inside, membership } = site;
+  const { inside } = site;
 
   return (
     <section
@@ -50,32 +50,6 @@ export default function Membership() {
             </li>
           ))}
         </ul>
-
-        {/* Join band */}
-        <div
-          className="card mt-14 flex flex-col items-center gap-7 p-7 sm:mt-16 sm:p-10 xl:flex-row xl:gap-12"
-          data-accent="true"
-          data-reveal="scale"
-        >
-          <div className="text-center xl:text-left">
-            <p className="font-display text-[clamp(26px,4vw,38px)] leading-[1.05] text-gold-2 uppercase">
-              Team Bodymechanik <span className="text-cream">Membership</span>
-            </p>
-            <p className="mt-2 text-sm text-muted">{membership.tagline}</p>
-          </div>
-
-          <div className="hidden flex-1 xl:block" aria-hidden="true" />
-
-          <a
-            href={membership.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn group w-full px-7 py-3 text-center leading-tight whitespace-normal xl:w-auto"
-          >
-            {membership.cta}
-            <ArrowRightIcon className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </a>
-        </div>
       </div>
     </section>
   );

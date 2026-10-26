@@ -35,13 +35,13 @@ export default function Hero() {
         <div>
           <p
             className="fade-up mb-4 flex items-center gap-3 font-display text-[11px] tracking-[0.3em] text-gold-2 uppercase sm:text-xs"
-            style={{ "--d": "60ms" } as React.CSSProperties}
+            style={{ "--d": "0ms" } as React.CSSProperties}
           >
             <span className="h-px w-8 bg-gradient-to-r from-transparent to-gold" aria-hidden="true" />
             {site.motto}
           </p>
 
-          <p className="eyebrow fade-up" style={{ "--d": "100ms" } as React.CSSProperties}>
+          <p className="eyebrow fade-up" style={{ "--d": "40ms" } as React.CSSProperties}>
             {site.hero.eyebrow}
           </p>
 
@@ -50,7 +50,7 @@ export default function Hero() {
               <span key={line.text} className="line-mask">
                 <span
                   className={line.gold ? "shine-text" : undefined}
-                  style={{ "--d": `${200 + i * 130}ms` } as React.CSSProperties}
+                  style={{ "--d": `${100 + i * 90}ms` } as React.CSSProperties}
                 >
                   {line.text}
                 </span>
@@ -58,16 +58,16 @@ export default function Hero() {
             ))}
           </h1>
 
-          <p className="copy fade-up mt-7 mb-8" style={{ "--d": "650ms" } as React.CSSProperties}>
+          <p className="copy fade-up mt-7 mb-8" style={{ "--d": "380ms" } as React.CSSProperties}>
             {site.hero.lead}
           </p>
 
           <div
             className="fade-up flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5"
-            style={{ "--d": "780ms" } as React.CSSProperties}
+            style={{ "--d": "460ms" } as React.CSSProperties}
           >
-            <a className="btn" href={site.membership.url} target="_blank" rel="noopener noreferrer">
-              {site.membership.cta}
+            <a className="btn" href="#membership">
+              Explore the Membership
             </a>
             <a className="btn btn-outline" href="#results">
               See the Results
@@ -86,7 +86,7 @@ export default function Hero() {
               <div
                 key={f.title}
                 className="fade-up flex items-start gap-3 border-t border-line pt-4"
-                style={{ "--d": `${900 + i * 110}ms` } as React.CSSProperties}
+                style={{ "--d": `${540 + i * 70}ms` } as React.CSSProperties}
               >
                 <span className="grid size-[34px] flex-none place-items-center rounded-full border border-gold font-display text-[13px] text-gold-2">
                   0{i + 1}
