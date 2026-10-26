@@ -37,7 +37,7 @@ export const site = {
     name: "Team Bodymechanik Membership",
     tagline: "South Asian fitness and fat loss coaching",
     url: SKOOL_URL,
-    cta: "Join the Membership",
+    cta: "Join: Desi Body Reset",
   },
 
   hero: {
@@ -157,7 +157,7 @@ export const site = {
         "Exercise tutorials & strength guides",
         "Community with direct coach access",
       ],
-      cta: "Join the Membership",
+      cta: "Join: Desi Body Reset",
       href: SKOOL_URL,
     },
     coaching: {
