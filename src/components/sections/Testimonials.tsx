@@ -24,13 +24,13 @@ export default function Testimonials() {
             return (
               <blockquote
                 key={t.name}
-                className={`card m-0 flex flex-col p-7 sm:p-8 ${featured ? "sm:col-span-2" : ""}`}
+                className="card m-0 flex flex-col p-7 sm:p-8"
                 data-accent={featured || undefined}
                 data-reveal
                 style={{ "--d": `${(i % 3) * 110}ms` } as React.CSSProperties}
               >
                 <QuoteIcon className="mb-5 h-7 w-9 text-gold-2" />
-                <p className={`m-0 flex-1 leading-[1.75] text-[#e8e3d9] ${featured ? "text-[17px] sm:text-lg" : "text-[15px]"}`}>
+                <p className={`m-0 flex-1 leading-[1.75] text-[#e8e3d9] text-[15px]`}>
                   {t.quote}
                 </p>
                 <footer className="mt-6 flex items-center gap-3">

@@ -15,7 +15,7 @@ export default function Faq() {
             FAQ
           </p>
           <h2 className="display h2" data-reveal style={{ "--d": "80ms" } as React.CSSProperties}>
-            Before you <span className="shine-text">apply</span>
+            Before you <span className="shine-text">join</span>
           </h2>
         </div>
 

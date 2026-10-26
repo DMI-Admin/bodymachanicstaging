@@ -29,23 +29,23 @@ export default function Enquiry() {
       <div className="shell relative z-[2] grid items-start gap-10 lg:grid-cols-2 lg:gap-20">
         <div className="lg:sticky lg:top-28">
           <p className="eyebrow" data-reveal>
-            Ready to transform?
+            1:1 coaching &amp; questions
           </p>
           <h2 className="display h2" data-reveal style={{ "--d": "80ms" } as React.CSSProperties}>
-            Your next phase
+            Want it fully
             <br />
-            <span className="shine-text">starts here.</span>
+            <span className="shine-text">personalised?</span>
           </h2>
           <p className="copy mt-5" data-reveal style={{ "--d": "160ms" } as React.CSSProperties}>
-            Apply for Team Bodymechanik coaching and tell us exactly what you want to achieve — or just send us a
-            question if you&rsquo;re not ready to apply yet.
+            Apply for 1:1 coaching and tell us exactly what you want to achieve — or send us a question about the
+            membership or coaching.
           </p>
 
           <ul className="mt-8 grid list-none gap-3 p-0">
             {[
               "Every enquiry is read personally by your coaches",
               "We reply with honest advice, not a sales script",
-              `${site.pricing.terms[1].value} per month, ${site.pricing.terms[0].value.toLowerCase()} minimum`,
+              `1:1 coaching: ${site.plans.coaching.price} per month, ${site.plans.coaching.terms}`,
             ].map((line, i) => (
               <li
                 key={line}
@@ -68,7 +68,7 @@ export default function Enquiry() {
               value={kind}
               onChange={(e) => setKind(e.target.value as "apply" | "contact")}
             >
-              <option value="apply">Applying for coaching</option>
+              <option value="apply">Applying for 1:1 coaching</option>
               <option value="contact">A general question</option>
             </select>
           </label>
@@ -113,7 +113,7 @@ export default function Enquiry() {
           </label>
 
           <Honeypot />
-          <SubmitButton state={state}>{applying ? "Apply for Coaching" : "Send Message"}</SubmitButton>
+          <SubmitButton state={state}>{applying ? "Apply for 1:1 Coaching" : "Send Message"}</SubmitButton>
           <FormNote
             state={state}
             note={note}

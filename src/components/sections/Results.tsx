@@ -75,6 +75,15 @@ export default function Results() {
             </button>
           ))}
         </div>
+
+        <div className="mt-12 flex flex-col items-center gap-4 text-center" data-reveal>
+          <p className="copy mx-auto">
+            Get the same training, nutrition and coach support inside the {site.membership.name}.
+          </p>
+          <a className="btn" href={site.membership.url} target="_blank" rel="noopener noreferrer">
+            {site.membership.cta}
+          </a>
+        </div>
       </div>
 
       <dialog
