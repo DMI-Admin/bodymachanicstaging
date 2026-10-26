@@ -46,15 +46,15 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-const INTRO_SCRIPT = "(function(){var d=document.documentElement;d.classList.add('js');var done=0;function ready(){if(!done){done=1;d.classList.add('ready')}}try{document.fonts.ready.then(ready)}catch(e){}setTimeout(ready,800);function reveal(){var els=document.querySelectorAll('[data-reveal]');if(!('IntersectionObserver' in window)){for(var i=0;i<els.length;i++)els[i].classList.add('is-visible');return}var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px',threshold:0.12});for(var j=0;j<els.length;j++)io.observe(els[j])}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',reveal);else reveal()})();";
+const INTRO_SCRIPT = "(function(){var d=document.documentElement;d.classList.add('js');var done=0;function ready(){if(!done){done=1;d.classList.add('ready')}}setTimeout(ready,1600);function hold(){var w=[];try{var cs=getComputedStyle(d);var o=cs.getPropertyValue('--font-oswald').split(',')[0].trim(),n=cs.getPropertyValue('--font-inter').split(',')[0].trim();if(o){w.push(document.fonts.load('500 1em '+o));w.push(document.fonts.load('700 1em '+o))}if(n)w.push(document.fonts.load('400 1em '+n))}catch(e){}var img=document.querySelector('.hero-logo');if(img){w.push(img.decode?img.decode().catch(function(){}):new Promise(function(r){img.complete?r():(img.onload=img.onerror=r)}))}Promise.all(w).then(ready,ready)}function reveal(){var els=document.querySelectorAll('[data-reveal]');if(!('IntersectionObserver' in window)){for(var i=0;i<els.length;i++)els[i].classList.add('is-visible');return}var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px',threshold:0.12});for(var j=0;j<els.length;j++)io.observe(els[j])}function start(){hold();reveal()}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start()})();";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${oswald.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         {/* Runs before first paint. Marks the page as having JS (so reveal styles
-            apply), adds `ready` once the fonts have loaded (0.8s at most) so the
-            hero's background and text come in together, and reveals sections as
+            apply), adds `ready` once the hero's fonts and logo have actually loaded
+            (1.6s at most) so its background, logo and text come in together, and reveals sections as
             they scroll into view without waiting for React to load. */}
         <script dangerouslySetInnerHTML={{ __html: INTRO_SCRIPT }} />
       </head>
