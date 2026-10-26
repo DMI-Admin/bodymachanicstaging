@@ -506,39 +506,54 @@ main {
 }
 
 /* ==================================================================
-   Scroll reveal — desktop only
+   Scroll reveal
    Only hides content once JS has confirmed it can reveal it again, so the
-   page never renders blank without JavaScript. On phones and tablets the
-   sections are simply there, so nothing looks unloaded while scrolling.
+   page never renders blank without JavaScript.
 ================================================================== */
-@media (min-width: 1024px) and (hover: hover) {
-  .js [data-reveal] {
-    opacity: 0;
-    translate: 0 36px;
-    transition:
-      opacity 0.9s var(--ease-out-expo),
-      translate 0.9s var(--ease-out-expo),
-      scale 0.9s var(--ease-out-expo);
-    transition-delay: var(--d, 0ms);
-  }
+.js [data-reveal] {
+  opacity: 0;
+  translate: 0 36px;
+  transition:
+    opacity 0.9s var(--ease-out-expo),
+    translate 0.9s var(--ease-out-expo),
+    scale 0.9s var(--ease-out-expo);
+  transition-delay: var(--d, 0ms);
+}
 
+.js [data-reveal="scale"] {
+  translate: 0 0;
+  scale: 0.94;
+}
+
+.js [data-reveal="left"] {
+  translate: -48px 0;
+}
+
+.js [data-reveal="right"] {
+  translate: 48px 0;
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+}
+
+/* Phones and tablets: the same flow, but quicker, a shorter rise and no
+   sideways slide, so sections arrive as you reach them rather than after. */
+@media (max-width: 1023px), (hover: none) {
+  .js [data-reveal],
+  .js [data-reveal="left"],
+  .js [data-reveal="right"],
   .js [data-reveal="scale"] {
-    translate: 0 0;
-    scale: 0.94;
-  }
-
-  .js [data-reveal="left"] {
-    translate: -48px 0;
-  }
-
-  .js [data-reveal="right"] {
-    translate: 48px 0;
+    translate: 0 18px;
+    scale: 1;
+    transition-duration: 0.55s;
+    transition-delay: calc(var(--d, 0ms) * 0.5);
   }
 
   .js [data-reveal].is-visible {
-    opacity: 1;
     translate: 0 0;
-    scale: 1;
   }
 }
 
@@ -1107,5 +1122,48 @@ select.field {
 
   .ember {
     display: none;
+  }
+}
+
+/* ==================================================================
+   Phones and tablets — same look, lighter effects
+   Large blurred glows, animated filters and frosted-glass panels are cheap
+   on a laptop but make a phone stutter while the page loads and scrolls.
+================================================================== */
+@media (max-width: 1023px), (hover: none) {
+  /* A soft gradient draws the same glow without a 100px blur filter */
+  .glow {
+    filter: none;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.16), transparent 68%);
+    animation: none;
+  }
+
+  .ember {
+    display: none;
+  }
+
+  .hero-grid-bg,
+  .logo-halo {
+    animation: none;
+  }
+
+  /* Keep the logo's gold shadow, but stop re-drawing it every frame */
+  .hero-logo {
+    animation: none;
+    filter: drop-shadow(0 12px 36px rgba(212, 175, 55, 0.25));
+  }
+
+  /* Solid header instead of frosted glass while scrolling */
+  .site-header[data-scrolled="true"],
+  .site-header[data-open="true"] {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(5, 5, 5, 0.97);
+  }
+
+  .backdrop-blur,
+  .lightbox::backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
